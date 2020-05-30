@@ -28,11 +28,10 @@ void setup() {
   {
     delay(500);
     Serial.print(".");
-  }
-  
- // webSocket.emit("update-status");
+  }  
   webSocket.begin(Host_Socket, Port_Socket, "/socket.io/?transport=websocket");
   Serial.println("Connected");
+  webSocket.emit("update-status","");
   webSocket.on("DevicesSttData", sendNano);
   beginTime = millis();
 }

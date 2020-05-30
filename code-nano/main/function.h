@@ -16,7 +16,7 @@ LiquidCrystal_I2C lcd(0x27,16,2);
 
 const int button[5] = {9, 12, 13};
 const int relay[5] = {4, 5, 6};
-int statusRelay[5] = {0,0,0};
+int statusRelay[5] = {1,1,1};
 
 float Temp = 0;         // bien nhan gia tri nhiet do tu DHT22
 float Humi = 0;         // bien nhan gia tri do am tu DHT22
@@ -37,6 +37,11 @@ void initFunction(){
     pinMode(relay[i], OUTPUT);
   }
   pinMode(pin_sensorSoil, INPUT);       // set chan input doc analog cho cam bien dat
+
+  for (int i=0; i<5; i++)                             // dieu khien thiet bị nhan tu webserver ve
+  {
+    digitalWrite(relay[i], statusRelay[i]);
+  }
 }
 
 /*--------------------ReadSensor function--------------------*/

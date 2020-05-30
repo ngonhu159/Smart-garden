@@ -89,7 +89,16 @@ io.on("connection", function(socket)
     } 
     DevicesControlFn(); // Thực thi
   });
-
+  socket.on("update-status", function() {
+    async function DevicesControlFn() {
+      result1 = await db.queryDisplayDevicesStt(); // Truy vấn giá trị trạng thái
+      if(result1 != "queryDisplayDevicesStt-ERROR"){
+        io.sockets.emit("DevicesSttData",result1); // Gửi giá trị trạng thái đến TẤT CẢ CLIENTS đang kết nối
+      }
+      else console.log(result1);
+    }
+    DevicesControlFn(); // Thực thi
+  });
   // Lắng nghe route "DisplayPlantAreas" từ các CLIENTS
   // Hàm này gửi các giá trị cây trồng cho CLIENT
   socket.on("DisplayPlantAreas", function() {
