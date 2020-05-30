@@ -1,0 +1,144 @@
+<html>
+
+<head>
+<title>My garden</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <!-- Vietnamese -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/img/tabicon.png"> <!-- Hiển thị icon trên tab -->
+<link rel="stylesheet" href="/css/dashboard.css">	<!-- File CSS tự tạo -->
+<link rel="stylesheet" href="/css/inputform.css">	<!-- File CSS tự tạo -->
+
+		
+<style>
+
+	body { /*Các setting chung cho cả trang*/ 
+	  font-family: Arial, Helvetica, sans-serif;
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;
+	  background-size: 100% 100%;
+	}
+
+</style>
+</head>
+
+
+<body>
+<table style="margin-left:auto;margin-right:auto; margin-top: auto; margin-bottom: auto;">
+	<td>
+		<table style="border-radius: 40px; border: 1px solid black;">
+			<tr>
+				<td>
+					<!-- Hiển thị hình nhiệt độ và giá trị nhiệt độ -->
+					<div id = "Temp" class ="myDeviceBox" >
+						<img id = "TempPic" src="img/temp.png" width="60px" height="60px">
+						<p id = "TempText" style="font-weight:bold; color : #F00D0D;"></p>
+					</div>
+				</td>
+				<td>
+					<!-- Hiển thị hình độ ẩm và giá trị độ ẩm-->
+					<div id = "Humi" class ="myDeviceBox">
+						<img src="img/humi.png" width="60px" height="60px">
+						<p id = "HumiText" style="font-weight:bold; color : #0D27F0;"></p>
+					</div>
+				</td>
+				<td>
+					<!-- Hiển thị hình độ ẩm đất và giá trị độ ẩm đất-->
+					<div id = "GHumi" class ="myDeviceBox">
+						<img src="img/ghumi.png" width="60px" height="60px">
+						<p id = "GHumiText" style="font-weight:bold; color : #0D27F0;"></p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<!-- Hiển thị hình đèn và nút nhấn, và hàm sẽ được gọi khi nút được nhấn -->
+					<div id = "Light" class ="myDeviceBox">
+						<img src= "img/light.png" width="60px" height="60px"><br>
+						<button id = "idBtnLight1" class ="myButton" style = "background-color: black;" onclick="DevicesControl('light1')"></button>	
+					</div>
+				</td>
+				<td>
+					<!-- Hiển thị hình bơm và nút nhấn, và hàm sẽ được gọi khi nút được nhấn -->
+					<div id = "Pump" class ="myDeviceBox">
+						<img src="img/pump.jpg" width="60px" height="60px"> <br>
+						<button id = "idBtnPump1" class ="myButton" style = "background-color: black;" onclick="DevicesControl('pump1')"></button>
+					</div>
+				</td>
+				<td>
+					<!-- Hiển thị hình quạt và nút nhấn, và hàm sẽ được gọi khi nút được nhấn -->
+					<div id = "Fan" class ="myDeviceBox">
+						<img src="img/fan.png" width="60px" height="60px"> <br>
+						<button id = "idBtnFan" class ="myButton" style = "background-color: black;" onclick="DevicesControl('fan')"></button><br><br>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</td>
+	<td>
+		<!-- Hiển thị thông tin cây và hàm sẽ được gọi khi khu vực được nhấn -->
+		<td rowspan="2" >
+			<div id = "idDivArea1" class ="myPlantBackGround" style = "border: 1px solid black"  onclick="ConfigPlant(1)">
+				<p id = "idPlant1" class = "myPlantDisplay "></p>
+			</div>
+		</td>
+	</td>
+</table><br><br>
+	
+	<!-- Bên dưới là form nhập thông tin cây, sẽ được ẩn đi khi người dùng chưa nhấn vào khu vực thông tin cây -->
+	<div id="idInputPlantForm" class="modal">
+ 		<form id = "idPlantForm" class="modal-content animate"  style = "padding: 16px;">
+    		<div id = "iddivInputPlantForm">
+    			<!-- Các thành phần bên dưới như nút nhấn và ô input -->
+      			<label id = "idplantlable"><b></b></label><br><br>
+      			<input id = "idplantname" class = "myInput1Col" type = "text" placeholder = "Tên cây" title="Tên cây" required>
+      			<br>
+      			<input id = "iddatebegin" class = "myInput2Col" type="date" placeholder ="Ngày trồng" title ="Ngày trồng" required>
+      			<input id = "iddateend" class = "myInput2Col" type="date" placeholder ="Thu hoạch" title ="Thu hoạch" required><br>
+      			<input id = "idwateringtime1" class = "myInput3Col" type="number" placeholder="Tưới lần 1(giờ)" title="Tưới lần 1(giờ)"min="0" max="23">
+      			<input id = "idwateringtime2" class = "myInput3Col" type="number" placeholder="Tưới lần 2(giờ)" title="Tưới lần 2(giờ)" min="0" max="23">
+      			<input id = "idwateringtime3" class = "myInput3Col" type="number" placeholder="Tưới lần 3(giờ)" title="Tưới lần 3(giờ)" min="0" max="23">
+      			<br>
+      			<input id = "idwateringoff" class = "myInput1Col" type="number" placeholder="Thời gian tắt(phút)" title="Thời gian tắt(phút)" min="1" max="5" required>
+      			<br>
+      			<button type="submit" class = "myFormButton" style="background-color:black;">Okay</button>
+      			<button type="button" class = "myFormButton" style="background-color:black;" onclick="document.getElementById('idInputPlantForm').style.display='none'">Cancel</button>
+				<button id = "idBtnDel" type="button" class = "myFormButton" style = "background-color: black;" onclick="DelPlant()" >Del</button>
+				<br><br><br>
+    		</div>
+
+  		</form>
+	</div>
+
+	<!-- Thông tin  -->
+	<table style="margin-left:auto;margin-right:auto; margin-top: auto; margin-bottom: auto; border-radius: 40px; border: 1px solid black;">
+		<tr>
+			<td colspan="2">
+				<div id = "idDivUniInfo" class = "myInfo">
+					<p id = "idInfo" style = "font-weight:bold; font-size: 25px; text-align: center;">
+						
+						<span style="color:red">TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT HỒ CHÍ MINH </span><br> 
+						<span style="color:red">KHOA ĐIỆN - ĐIỆN TỬ </span><br>
+						<span style="color:black">ĐỒ ÁN TỐT NGHIỆP </span><br>
+						<span style="color:blue">THIẾT KẾ VÀ THI CÔNG TỦ TRỒNG RAU TRONG NHÀ </span> <br>
+					</p>
+					<p id = "idMemInfo" style = "font-weight:bold; font-size: 25px; text-align: left;">
+						<span style="color:green">TRẦN TẤN SANG </span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+						<span style="color:green">16141256</span> <br>
+						<span style="color:green">HUỲNH HỒNG SƠN</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;
+						<span style="color:green">16141259</span> <br>
+					</p>
+				</div>
+
+			</td>
+		</tr>
+	</table>
+
+</body>
+
+<!-- Include các file script -->
+<script src ="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src = "/socket.io/socket.io.js"></script>
+<script src = "/functions/dashboardfn.js"></script>
+<script src = "/functions/plantsfn.js"></script>
+</html>

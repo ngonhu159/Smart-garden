@@ -1,0 +1,68 @@
+.myDeviceBox {
+  display: inline-block;
+  background-color: transparent;
+  width: 150px;
+  max-height: 100px;
+  padding: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: auto;
+  border-radius: 20px;
+  opacity:0.8;
+  font-size:200%;
+}
+
+.myButton{
+  cursor: pointer;
+  display: inline-block;
+  width: 70px;
+  height: 30px;
+  color: white;	
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  border: none;
+  margin: 5px;
+}
+
+.myPlantBackGround:hover {
+  background-color: #BBFFB2;
+}
+
+.myPlantBackGround{
+  cursor: pointer;
+  background-color: white;
+  width: 400px;
+  max-height: 300px;
+  padding: 28px;
+  border-radius: 30px;
+  opacity: 0.8;
+  transition: 0.5s;
+}
+
+.myPlantDisplay{
+  font-weight:bold;
+  color: black; 
+  text-align: left; 
+  font-size: 35px
+
+}
+
+
+.myInfo{
+  background-color: white; 
+  width: 800px;
+  max-height: 300px;
+  padding: 20px;
+  border-radius: 40px;
+
+}
+
+td {
+  border: 0px solid black;
+}
+.td_1 {
+  width: 100%;
+}
+
+
